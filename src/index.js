@@ -15,13 +15,17 @@ function agregarTarea() {
 
     const btnEliminar = document.createElement("button");
     btnEliminar.textContent = "X";
+    btnEliminar.classList.add("eliminar");
     const btnEditar = document.createElement("button");
     btnEditar.textContent = "Editar";
+    btnEditar.classList.add("editar");
 
-    li.appendChild(btnEliminar);
     li.appendChild(btnEditar);
+    li.appendChild(btnEliminar);
     lista.appendChild(li);
     input.value = "";
+
+    guardarTareas();
 }
 
 function gestionarTarea(e) {
@@ -39,6 +43,8 @@ function gestionarTarea(e) {
     } else {
         e.target.classList.toggle("completada");
     }
+
+    guardarTareas();
 }
 
 function guardarTareas() {
@@ -53,6 +59,7 @@ function guardarTareas() {
 }
 
 function cargarTareas() {
+    lista.innerHTML = "";
     const tareas = JSON.parse(localStorage.getItem("tareas")) || [];
     tareas.forEach(tarea => {
         const li = document.createElement("li");
@@ -63,12 +70,13 @@ function cargarTareas() {
 
         const btnEliminar = document.createElement("button");
         btnEliminar.textContent = "X";
+        btnEliminar.classList.add("eliminar");
         const btnEditar = document.createElement("button");
         btnEditar.textContent = "Editar";
         btnEditar.classList.add("editar");
 
-        li.appendChild(btnEliminar);
         li.appendChild(btnEditar);
+        li.appendChild(btnEliminar);
         lista.appendChild(li);
     });
 }
